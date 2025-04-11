@@ -1,0 +1,34 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc.exe build active file 😻",
+			"command": "C:/msys64/ucrt64/bin/g++.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-I",
+				"C:/Program Files/MySQL/MySQL Server 8.0/include",
+				"-L",
+				"C:/Program Files/MySQL/MySQL Server 8.0/lib",
+				"-llibmysql",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				""
+			],
+			"options": {
+				"cwd": "C:/msys64/ucrt64/bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: C:/msys64/ucrt64/bin/gcc.exe"
+		}
+	]
+}
