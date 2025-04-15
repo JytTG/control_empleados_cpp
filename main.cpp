@@ -1,22 +1,40 @@
 #include "MySQLConexion.h"
 #include "EloquentORM.h"
 #include <iostream>
+#include <vector>
+#include <string>
+
 using namespace std;
 
 int main() {
-    MySQLConexion conn("localhost", "usuario", "contraseña", "nombre_base_datos");
-    if (!conn.conectar()) {
-        cerr << "No se pudo conectar." << endl;
+    // Crear la conexión a la base de datos
+    MySQLConexion conn("root", "150305", "control_horario");
+
+    // Verificar si la conexión fue exitosa
+    if (!conn.open()) {
+        cerr << "No se pudo conectar a la base de datos." << endl;
         return 1;
     }
-
-    vector<string> columnas = {"id", "nombre", "hora_entrada", "hora_salida"};
-    EloquentORM empleados(conn, "empleados", columnas);
-
-    auto lista = empleados.getAll();
-    for (auto &reg : lista) {
-        cout << "ID: " << reg["id"] << ", Nombre: " << reg["nombre"] << endl;
+    else {
+        cout << "¡Conexión exitosa!" << endl;
     }
 
+    // Definir las columnas que se quieren obtener de la tabla 'personas'
+    vector<string> columnas = { "nombre", "edad", "genero" };
+
+    // Crear una instancia del ORM para la tabla 'personas'
+    EloquentORM personas(conn, "personas", columnas);
+
+    // Obtener todos los registros
+    auto lista = personas.getAll();
+
+    // Mostrar los registros en consola
+    for (auto& reg : lista) {
+        cout << "ID: " << reg["ID"]
+             << ", Nombre: " << reg["nombre"]
+             << ", Edad: " << reg["edad"]
+             << ", Género: " << reg["genero"] << endl;
+    }
+    system("pause");
     return 0;
 }
